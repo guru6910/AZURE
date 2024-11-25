@@ -14,6 +14,5 @@ provider "aws" {
 # Add your existing resources here
 # For example, creating an S3 bucket
 resource "aws_s3_bucket" "my_bucket" {
-  bucket = "my-unique-bucket-name"
-  acl    = "private"
+  bucket = "guru1234567890"
 }
