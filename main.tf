@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-northeast-1"  # Set your desired AWS region
+  region = "ap-northeast-1"  # Set your desired AWS region
 }
 
 # Add your existing resources here
