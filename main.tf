@@ -1,13 +1,19 @@
-provider "aws" {
-  region = "ap-northeast-1"
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "~> 3.0"  # Adjust the version as needed
+    }
+  }
 }
 
-resource "aws_instance" "instance" {
-  ami           = "ami-0b20f552f63953f0e"
-  instance_type = "t2.micro"
-  availability_zone = "ap-northeast-1a"
+provider "aws" {
+  region = "us-east-1"  # Set your desired AWS region
+}
 
-  tags = {
-    Name = "terraform_instance"
-  }
+# Add your existing resources here
+# For example, creating an S3 bucket
+resource "aws_s3_bucket" "my_bucket" {
+  bucket = "my-unique-bucket-name"
+  acl    = "private"
 }
