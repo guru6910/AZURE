@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/guru6910/AZURE.git'  // Replace with your repository details
+            }
+        }
+
+        stage('Terraform Init') {
+            steps {
+                script {
+                    sh 'terraform init'
+                }
+            }
+        }
+
+        stage('Terraform Validate') {
+            steps {
+                script {
+                    sh 'terraform validate'
+                }
+            }
+        }
+
+        stage('Terraform Plan') {
+            steps {
+                script {
+                    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'credentials', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                        sh 'terraform plan -out=tfplan'
+                        sh 'terraform apply tfplan'
+
+                    }
+                }
+            }
+        }
+    }
+}
